@@ -34,6 +34,6 @@
   "description": "Portfolio of Jeffrey Agyemang Acheampong — aspiring cybersecurity analyst and digital media creator (Kumasi, Ghana).",
   "license": "SEE LICENSE IN LICENSE",
   "engines": {
-    "node": ">=20.9.0"
+    "node": "22.x"
   }
 }

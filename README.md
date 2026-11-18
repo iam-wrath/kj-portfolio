@@ -1,105 +1,135 @@
 # Jeffrey Agyemang Acheampong — Portfolio
 
-Personal portfolio for **Jeffrey Agyemang Acheampong**, an aspiring cybersecurity analyst and digital media creator in Kumasi, Ghana. It presents security learning and projects alongside photography, videography, editing and live-streaming work, with an admin panel for adding new videos and photos without touching code.
+This is the portfolio site I built for **Jeffrey Agyemang Acheampong**. He's a KNUST student in Kumasi working towards a career in cybersecurity, and he's also a photographer, videographer and live-stream operator. The site has to do two jobs: show recruiters his security and dev work, and show churches, event hosts and brands his media work.
 
-## Features
+Jeffrey needed to be able to keep it updated himself, so there's an admin panel where he can add a video by pasting a YouTube link or upload photos, without ever opening the code.
 
-- **Pages:** Home, About, Cybersecurity, Projects, Showcase (videos), Gallery (photos), Services, Contact.
-- **Content admin** at `/keystatic`: add videos by pasting a YouTube or Vimeo link, upload photos, and edit every page's text.
-- **One 3D moment:** a camera-iris aperture on the Home page that opens on scroll to reveal the featured reel. It is lazy-loaded, renders only on demand, and falls back to SVG when WebGL is unavailable.
-- **Motion:**
-  - A short intro once per session.
-  - CSS headline reveals for fast first paint.
-  - Scroll-in section transitions.
-  - An Experience timeline that draws itself as you scroll.
-  - Smooth scrolling and a viewfinder cursor on desktop.
-  - Everything respects reduced motion.
-- **Media performance:** videos load only after "play". Photos are served as AVIF/WebP with blur placeholders and a keyboard- and swipe-friendly lightbox, plus before/after sliders.
-- **Security:** a per-request nonce Content-Security-Policy, HSTS, `X-Frame-Options: DENY`, and a strict Permissions-Policy. The contact form has no server endpoint and no API keys.
-- **SEO and accessibility:** metadata per page, Open Graph and Twitter images, a favicon set and manifest, sitemap, robots, and JSON-LD `Person`. Pages are semantic and keyboard navigable, with visible focus states.
+## What's on the site
 
-## Tech stack
+- **Home**
+- **About**, with his story and an Experience timeline
+- **Cybersecurity**, with his goals, the topics he's studying and a learning log of labs
+- **Projects**, filterable by Web Dev, Cybersecurity and Study Tools
+- **Showcase**, his video work: a featured reel plus filterable categories
+- **Gallery**, a photo grid with a lightbox and before/after edit sliders
+- **Services**, covering the roles he works in, live streaming and his kit
+- **Contact**, a form that opens your own email app or WhatsApp with the message ready to send
 
-| Area | Choice |
-|---|---|
-| Framework | Next.js 16 (App Router), React 19, TypeScript |
-| Content | Keystatic (git-based CMS; content lives in `content/` and `public/media/`) |
-| Motion | GSAP + ScrollTrigger, Lenis, `motion` (section transitions) |
-| 3D | three.js (plain, no React wrapper) |
-| Styling | Plain CSS with design tokens (`src/styles/tokens.css`) |
-| Hosting | Vercel |
+A few things I cared about while building it:
 
-## Getting started
+- **Fast on slow connections.** A lot of his visitors will be on mobile data in Ghana. YouTube videos don't load until you press play, photos are served as AVIF/WebP, and the 3D part only downloads when you scroll near it.
+- **One 3D moment, not ten.** On the home page a camera-iris aperture opens as you scroll and reveals his showreel through the lens. It's built with three.js, renders only when something changes, and falls back to an SVG if WebGL isn't available.
+- **Secure by default,** because it's a cybersecurity portfolio:
+  - a strict Content Security Policy with a fresh nonce on every request;
+  - HSTS and clickjacking protection;
+  - no API keys in the browser, and no form endpoint for bots to spam.
+- **Accessible.** It's keyboard friendly with visible focus states, and anyone with "reduce motion" turned on gets a calm, static version.
 
-Requires **Node.js 20.9+**.
+## Built with
+
+- [Next.js 16](https://nextjs.org) (App Router) with React 19 and TypeScript
+- [Keystatic](https://keystatic.com) for the admin. All content lives as files in this repo.
+- [GSAP](https://gsap.com), [Lenis](https://lenis.darkroom.engineering) and [Motion](https://motion.dev) for animation
+- [three.js](https://threejs.org) for the aperture
+- Plain CSS with design tokens: no Tailwind, no UI library
+- Hosted on [Vercel](https://vercel.com)
+
+## Running it locally
+
+You'll need Node 20.9 or newer.
 
 ```bash
+git clone https://github.com/iam-wrath/kj-portfolio.git
+cd kj-portfolio
 npm install
-npm run dev          # http://localhost:3000   ·   admin: http://localhost:3000/keystatic
+npm run dev
 ```
 
-| Script | What it does |
+The site is then at http://localhost:3000, and the admin is at http://localhost:3000/keystatic.
+
+When you run it locally, the admin edits the files on your machine directly. That's handy for testing content changes before pushing.
+
+Other scripts:
+
+```bash
+npm run build      # production build
+npm start          # serve the production build
+npm run lint       # eslint
+npm run typecheck  # route types + tsc
+```
+
+### Testing switches (dev only)
+
+Add these to any URL while running `npm run dev`:
+
+- `?motion=reduce` shows the site the way someone with reduced motion turned on sees it.
+- `?webgl=off` forces the SVG version of the aperture.
+
+## How content works
+
+Everything Jeffrey can edit lives in two folders:
+
+- `content/` holds the text, video links, projects, certifications and learning log, as YAML.
+- `public/media/` holds the photos, the before/after images and the CV.
+
+On the live site he signs in at `/keystatic` with his GitHub account. When he saves, Keystatic commits the change to this repo, and Vercel redeploys within about a minute. Only GitHub accounts with write access to the repo can sign in.
+
+[HANDOVER.md](HANDOVER.md) is the plain-English guide I wrote for him. It covers adding videos and photos, editing pages, and the checklist for swapping out the placeholder content.
+
+## Environment variables
+
+Copy `.env.example` to `.env.local` for local work. `.env.local` is git-ignored, so never commit real values.
+
+| Variable | What it's for |
 |---|---|
-| `npm run dev` | Development server, with the local admin |
-| `npm run build` | Production build |
-| `npm start` | Serve the production build |
-| `npm run lint` | ESLint |
-| `npm run typecheck` | Generate route types and run TypeScript |
+| `NEXT_PUBLIC_SITE_URL` | The live URL. Used for the sitemap, canonical links and social previews. |
+| `NEXT_PUBLIC_KEYSTATIC_GITHUB_REPO` | Which repo the admin saves to (`iam-wrath/kj-portfolio`). Without it, the admin only works locally. |
+| `KEYSTATIC_GITHUB_CLIENT_ID` | GitHub App login. Generated by Keystatic. |
+| `KEYSTATIC_GITHUB_CLIENT_SECRET` | GitHub App login. Generated by Keystatic. **Secret.** |
+| `KEYSTATIC_SECRET` | Signs admin sessions. Generated by Keystatic. **Secret.** |
+| `NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` | The GitHub App's name. Generated by Keystatic. |
 
-## Deploying to Vercel
+To generate the four Keystatic values:
+1. Set `NEXT_PUBLIC_KEYSTATIC_GITHUB_REPO` in `.env.local`.
+2. Run `npm run dev` and open `/keystatic`.
+3. Follow the steps to create a GitHub App. Give it the live URL when it asks, so the production login callback is registered.
+4. Copy the generated values into Vercel's environment variables and redeploy.
 
-1. Push this repository to GitHub and import it in Vercel. Next.js is detected automatically, so no extra build settings are needed.
-2. Add the environment variables listed below.
-3. Add your custom domain under **Project → Settings → Domains**. HTTPS is automatic.
+If `NEXT_PUBLIC_KEYSTATIC_GITHUB_REPO` isn't set in production, `/keystatic` returns a 404. Without that variable the admin would edit files with no login, so it's blocked rather than left open.
 
-### Environment variables
+## Deploying
 
-Copy `.env.example` to `.env.local` for local work. Never commit real values.
+The site runs on Vercel:
+1. Import the repo. Vercel detects Next.js, so no build settings need changing.
+2. Add the environment variables above.
+3. Add the custom domain under Project → Settings → Domains.
 
-| Variable | Needed for | Notes |
-|---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | Canonical URLs, sitemap, social images | e.g. `https://your-domain.com` |
-| `NEXT_PUBLIC_KEYSTATIC_GITHUB_REPO` | Admin on the live site | `owner/repo-name`; without it the admin works only in `npm run dev` |
-| `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET`, `NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` | Admin on the live site | Created by Keystatic's GitHub App setup; server-side secrets |
+`NEXT_PUBLIC_` values get baked in at build time, so redeploy after changing them.
 
-### Admin on the live site
-
-In production, the admin requires GitHub sign-in. It returns 404 until GitHub mode is configured, so an open admin can never be exposed.
-
-1. Set `NEXT_PUBLIC_KEYSTATIC_GITHUB_REPO` in `.env.local`, run `npm run dev` and open `/keystatic`. Keystatic walks you through creating a GitHub App.
-2. Copy the generated values from `.env.local` into Vercel's environment variables and redeploy.
-3. Edit at `https://your-domain.com/keystatic`. Each save commits to GitHub, and Vercel redeploys in about a minute.
-
-## Project structure
+## Project layout
 
 ```
-content/                 Site text, videos, photos, projects… (edited by the admin)
-public/media/            Uploaded images and the CV
-keystatic.config.ts      Content model and admin fields
+content/            site text and data (edited through the admin)
+public/media/       photos, before/after images, CV
+keystatic.config.ts what the admin can edit
 src/
-  app/(site)/            Pages (Home, About, Cybersecurity, …)
-  app/keystatic/         Admin UI          app/api/keystatic/  Admin API
-  components/            UI: nav, gallery, lightbox, video, aperture, cursor, reveals
-  three/                 three.js aperture scene + shared iris maths
-  motion/                GSAP loader, Lenis, scroll reveals, environment helpers
-  lib/                   Content reader, video-link parser, site URL
-  styles/                Design tokens + global styles
-  proxy.ts               Per-request CSP nonce
-next.config.ts           Security headers, image formats
-HANDOVER.md              Plain-language guide to updating content
+  app/(site)/       the pages
+  app/keystatic/    the admin UI (API route lives in app/api/keystatic/)
+  components/       nav, gallery, lightbox, video embeds, aperture, cursor…
+  three/            the three.js aperture scene
+  motion/           animation setup (GSAP loader, Lenis, scroll reveals)
+  lib/              content reader, YouTube/Vimeo link parser
+  styles/           design tokens and global CSS
+  proxy.ts          sets the CSP nonce on every request
+next.config.ts      security headers and image settings
 ```
 
-## Updating content
+## Still to do before launch
 
-See **[HANDOVER.md](HANDOVER.md)**. It covers adding videos and photos, editing page text, the first-time checklist for replacing placeholder content, and security notes.
-
-## Placeholder content
-
-The current photos are generated placeholders, and the sample videos are Blender Foundation open films. Contact details are dummies. Replace all of them before launch; the checklist is in HANDOVER.md.
+The photos in the repo right now are generated placeholders. The sample videos are Blender Foundation open films, and the email and WhatsApp number are dummies. Jeffrey is swapping in his real content through the admin; the checklist is in [HANDOVER.md](HANDOVER.md).
 
 ## License
 
-- **Code:** [MIT](LICENSE). You're welcome to learn from it or reuse it.
-- **Content and media: all rights reserved.** Photos, images, the CV, written copy (`public/media/`, `content/`) and linked videos are © Jeffrey Agyemang Acheampong. They may not be reused without written permission.
+The **code** is [MIT](LICENSE). Feel free to learn from it or borrow bits.
 
-See [LICENSE](LICENSE) for the full terms.
+The **content** isn't. Jeffrey's photos, videos, CV and written copy (`content/` and `public/media/`) are all rights reserved, so please don't reuse them without asking him first. Full terms are in [LICENSE](LICENSE).
