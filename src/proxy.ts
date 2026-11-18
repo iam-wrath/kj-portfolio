@@ -14,9 +14,10 @@ export function proxy(request: NextRequest) {
         "default-src 'self'",
         `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-        "img-src 'self' data: blob: https://avatars.githubusercontent.com https://i.ytimg.com",
+        "img-src 'self' data: blob: https://avatars.githubusercontent.com https://raw.githubusercontent.com https://i.ytimg.com",
         "font-src 'self' data: https://fonts.gstatic.com",
-        "connect-src 'self' https://api.github.com https://github.com",
+        // Keystatic (GitHub mode, public repo) reads file contents from raw.githubusercontent.com.
+        "connect-src 'self' https://api.github.com https://github.com https://raw.githubusercontent.com",
         "frame-src 'none'",
         "object-src 'none'",
         "base-uri 'self'",

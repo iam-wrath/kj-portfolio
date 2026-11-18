@@ -19,6 +19,9 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   reactCompiler: true,
   poweredByHeader: false,
+  // Dev only: Keystatic's GitHub mode moves the local admin to 127.0.0.1 (GitHub OAuth needs it),
+  // so the dev server must accept that origin. Has no effect on production builds.
+  allowedDevOrigins: ["127.0.0.1"],
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [480, 640, 828, 1080, 1440, 1920],

@@ -173,9 +173,14 @@ main { display: block; }
 }
 
 /* ---------- hero (typographic) ---------- */
+/* Phones/small tablets: the hero hugs its content (a full-height hero leaves a big empty band
+   above the text on tall screens). From 900px wide it fills the viewport, text anchored low. */
 .hero {
-  position: relative; min-height: min(100svh, 1000px); display: flex; flex-direction: column; justify-content: flex-end;
-  padding-top: calc(var(--nav-h) + var(--s-8)); padding-bottom: clamp(40px, 6vw, 88px);
+  position: relative; display: flex; flex-direction: column; justify-content: flex-end;
+  padding-top: calc(var(--nav-h) + clamp(40px, 9vw, 72px)); padding-bottom: clamp(40px, 6vw, 88px);
+}
+@media (min-width: 900px) {
+  .hero { min-height: min(100svh, 1000px); padding-top: calc(var(--nav-h) + var(--s-8)); }
 }
 .hero__content { display: grid; gap: clamp(28px, 4vw, 48px); }
 .hero__title { font-size: var(--fs-hero); font-weight: 750; letter-spacing: -0.055em; line-height: 0.92; }
