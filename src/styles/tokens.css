@@ -1,0 +1,81 @@
+/* Design tokens. Pure black is the default; light theme via [data-theme="light"]. */
+:root {
+  --ink-950: #000000;
+  --ink-900: #0a0a0a;
+  --ink-850: #111111;
+  --ink-800: #1a1a1a;
+  --paper: #f5f5f5;
+  --signal: #c6ff3d;          /* acid lime */
+
+  /* semantic — dark (default) */
+  --bg: var(--ink-950);
+  --bg-elevated: var(--ink-950); /* all-black: alternate sections separate with hairlines, not tone */
+  --surface: var(--ink-850);
+  --surface-2: var(--ink-800);
+  --text: var(--paper);        /* 19.3:1 on bg */
+  --text-muted: #a3a3a3;       /* 8.9:1 */
+  --text-subtle: #8a8a8a;      /* 6.4:1 */
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.2);
+  --accent: var(--signal);     /* 17.4:1 on bg */
+  --accent-strong: #d7ff73;
+  --accent-ink: #000000;
+  --accent-soft: rgba(198, 255, 61, 0.12);
+  --focus: var(--signal);
+  --overlay: rgba(0, 0, 0, 0.95);
+  --grid-line: rgba(255, 255, 255, 0.045);
+  --shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.9);
+  --grain-opacity: 0.06;
+  --error: #ff6b6b;
+
+  /* type */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-sans);
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --fs-xs: 0.8125rem;
+  --fs-sm: 0.9375rem;
+  --fs-base: 1.0625rem;
+  --fs-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
+  --fs-xl: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
+  --fs-2xl: clamp(1.875rem, 1.35rem + 2.2vw, 3.25rem);
+  --fs-3xl: clamp(2.375rem, 1.5rem + 4vw, 5rem);
+  --fs-hero: clamp(2.75rem, 0.6rem + 8.6vw, 8.25rem);
+
+  /* space (4/8 grid) */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px;
+  --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 128px;
+  --gutter: clamp(16px, 4.5vw, 48px);
+  --section: clamp(88px, 12vw, 176px);
+  --container: 1200px;
+
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --nav-h: 68px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #f5f5f2;
+  --bg-elevated: #ebebe7;
+  --surface: #ffffff;
+  --surface-2: #e4e4df;
+  --text: #0a0a0a;             /* 18.6:1 */
+  --text-muted: #525252;       /* 7.3:1 */
+  --text-subtle: #636363;      /* 5.6:1 */
+  --border: rgba(0, 0, 0, 0.1);
+  --border-strong: rgba(0, 0, 0, 0.2);
+  --accent: #3f6b00;           /* lime, darkened for 5.9:1 on light bg */
+  --accent-strong: #2f5200;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(63, 107, 0, 0.1);
+  --focus: #3f6b00;
+  --overlay: rgba(0, 0, 0, 0.95);
+  --grid-line: rgba(0, 0, 0, 0.05);
+  --shadow: 0 30px 70px -34px rgba(0, 0, 0, 0.3);
+  --grain-opacity: 0.045;
+  --error: #b42318;
+  color-scheme: light;
+}

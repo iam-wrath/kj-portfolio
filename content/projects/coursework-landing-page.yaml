@@ -1,0 +1,11 @@
+title: "Responsive coursework site"
+summary: "A responsive multi-page site built for web development coursework."
+tags:
+  - "web-dev"
+tools:
+  - "HTML"
+  - "CSS"
+  - "Git"
+github: "https://github.com/"
+demo: ""
+order: 3

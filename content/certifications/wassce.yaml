@@ -1,0 +1,6 @@
+name: "WASSCE"
+issuer: "West African Examinations Council"
+kind: "education"
+date: "Completed"
+verifyUrl: ""
+order: 6

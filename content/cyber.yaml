@@ -1,0 +1,19 @@
+intro: "I'm building my cybersecurity foundations step by step: networking, operating systems and web technologies first, then security concepts, tooling and hands-on labs. This page is my public learning log — it grows as I do."
+goals:
+  - "Land a cybersecurity analyst internship or graduate role"
+  - "Earn an entry-level security certification (e.g. CompTIA Security+)"
+  - "Publish regular lab write-ups and notes"
+topics:
+  - "Networking fundamentals"
+  - "Linux command line"
+  - "Web application security (OWASP Top 10)"
+  - "Security operations & log analysis"
+  - "Cryptography basics"
+  - "Git & secure development"
+platforms:
+  - label: "TryHackMe"
+    url: "https://tryhackme.com/"
+  - label: "Hack The Box Academy"
+    url: "https://academy.hackthebox.com/"
+  - label: "PortSwigger Web Security Academy"
+    url: "https://portswigger.net/web-security"

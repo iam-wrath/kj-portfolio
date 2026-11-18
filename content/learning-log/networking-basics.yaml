@@ -1,0 +1,5 @@
+title: "Networking basics"
+date: "2025-04-02"
+platform: "TryHackMe"
+summary: "OSI and TCP/IP models, subnetting, DNS, and reading packet captures in Wireshark."
+link: ""
