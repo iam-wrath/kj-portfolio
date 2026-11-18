@@ -29,7 +29,7 @@
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
-    "typescript": "^5"
+    "typescript": "^7"
   },
   "description": "Portfolio of Jeffrey Agyemang Acheampong — aspiring cybersecurity analyst and digital media creator (Kumasi, Ghana).",
   "license": "SEE LICENSE IN LICENSE",
