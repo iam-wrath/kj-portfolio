@@ -396,7 +396,9 @@ html.has-motion .timeline__track { transform: scaleY(0); }
 /* ---------- split layouts ---------- */
 .split { display: grid; gap: var(--s-7); }
 @media (min-width: 960px) { .split { grid-template-columns: 1fr 1fr; align-items: start; gap: var(--s-9); } .split--narrow-left { grid-template-columns: 0.8fr 1.2fr; } }
-.sticky-col { position: sticky; top: calc(var(--nav-h) + 32px); }
+/* Only sticky when the split is two columns side by side; stacked on mobile it would pin
+   under the nav and let the following content scroll over it. */
+@media (min-width: 960px) { .sticky-col { position: sticky; top: calc(var(--nav-h) + 32px); } }
 
 .stat-row { display: grid; grid-template-columns: 1fr; gap: var(--s-5); }
 @media (min-width: 560px) { .stat-row { grid-template-columns: repeat(2, 1fr); } }
